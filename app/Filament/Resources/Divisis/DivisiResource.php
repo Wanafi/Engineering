@@ -9,6 +9,7 @@ use App\Filament\Resources\Divisis\Schemas\DivisiForm;
 use App\Filament\Resources\Divisis\Tables\DivisisTable;
 use App\Models\Divisi;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -18,7 +19,9 @@ class DivisiResource extends Resource
 {
     protected static ?string $model = Divisi::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Human Resource';
 
     protected static ?string $recordTitleAttribute = 'Divisi';
 
