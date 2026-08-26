@@ -39,6 +39,35 @@ class UsersTable
                     ->copyable()
                     ->copyMessage('Email berhasil disalin'),
 
+                TextColumn::make('phone')
+                    ->label('Telepon')
+                    ->toggleable(isToggledHiddenByDefault: true),
+
+                TextColumn::make('division.nama_divisi')
+                    ->label('Divisi')
+                    ->badge()
+                    ->color(fn ($record) => $record->division?->warna)
+                    ->sortable(),
+
+                TextColumn::make('status')
+                    ->label('Status')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'tetap' => 'Tetap',
+                        'kontrak' => 'Kontrak',
+                        'magang' => 'Magang',
+                        'lepas' => 'Lepas/Freelance',
+                        default => $state,
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'tetap' => 'success',
+                        'kontrak' => 'warning',
+                        'magang' => 'info',
+                        'lepas' => 'gray',
+                        default => 'gray',
+                    }),
+
+
                 // ========================================
                 // ROLE
                 // ========================================
