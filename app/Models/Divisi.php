@@ -33,4 +33,9 @@ class Divisi extends Model
     {
         return $this->hasMany(Event::class);
     }
+
+    public function units()
+    {
+        return $this->hasMany(Unit::class);
+    }
 }
