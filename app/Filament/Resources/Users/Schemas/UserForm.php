@@ -14,79 +14,57 @@ class UserForm
     {
         return $schema
             ->components([
-
-                // ========================================
-                // INFORMASI PENGGUNA
-                // ========================================
                 Section::make('Informasi Pengguna')
-                    ->description('Informasi dasar akun pengguna.')
+                    ->description('Data identitas pengguna.')
                     ->icon('heroicon-o-user')
                     ->schema([
                         TextInput::make('name')
                             ->label('Nama Lengkap')
-                            ->placeholder('Masukkan nama lengkap')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(255)
+                            ->placeholder('Nama lengkap'),
 
                         TextInput::make('email')
-                            ->label('Alamat Email')
-                            ->placeholder('contoh@email.com')
+                            ->label('Email')
                             ->email()
                             ->required()
                             ->unique(ignoreRecord: true)
                             ->maxLength(255),
 
                         TextInput::make('phone')
-                            ->label('No. Telepon/HP')
+                            ->label('No. HP')
                             ->tel()
-                            ->maxLength(20),
+                            ->maxLength(20)
+                            ->columnSpanFull(),
                     ])
                     ->columns(2),
 
-                // ========================================
-                // KEAMANAN AKUN
-                // ========================================
                 Section::make('Keamanan Akun')
-                    ->description('Atur password untuk akun pengguna.')
+                    ->description('Kosongkan jika tidak ingin mengubah password.')
                     ->icon('heroicon-o-lock-closed')
                     ->schema([
                         TextInput::make('password')
                             ->label('Password')
-                            ->placeholder('Masukkan password')
                             ->password()
                             ->revealable()
-                            ->dehydrateStateUsing(
-                                fn($state) => filled($state)
-                                    ? Hash::make($state)
-                                    : null
-                            )
-                            ->dehydrated(fn($state) => filled($state))
-                            ->required(
-                                fn(string $operation): bool =>
-                                $operation === 'create'
-                            )
+                            ->dehydrateStateUsing(fn ($state) => filled($state) ? Hash::make($state) : null)
+                            ->dehydrated(fn ($state) => filled($state))
+                            ->required(fn (string $operation): bool => $operation === 'create')
                             ->minLength(8)
                             ->maxLength(255),
 
                         TextInput::make('password_confirmation')
                             ->label('Konfirmasi Password')
-                            ->placeholder('Ulangi password')
                             ->password()
                             ->revealable()
                             ->same('password')
-                            ->required(
-                                fn(string $operation): bool =>
-                                $operation === 'create'
-                            )
+                            ->required(fn (string $operation): bool => $operation === 'create')
                             ->dehydrated(false),
                     ])
                     ->columns(2),
 
-                // ========================================
-                // HAK AKSES
-                // ========================================
-                Section::make('Hak Akses')
-                    ->description('Tentukan role dan hak akses pengguna.')
+                Section::make('Penempatan & Hak Akses')
+                    ->description('Divisi, status kepegawaian, dan role sistem.')
                     ->icon('heroicon-o-shield-check')
                     ->schema([
                         Select::make('division_id')
@@ -94,27 +72,32 @@ class UserForm
                             ->relationship('division', 'nama_divisi')
                             ->searchable()
                             ->preload()
+                            ->native(false)
                             ->required(),
 
                         Select::make('status')
-                            ->label('Status Kepegawaian')
+                            ->label('Status Pegawai')
                             ->options([
                                 'tetap' => 'Tetap',
                                 'kontrak' => 'Kontrak',
                                 'magang' => 'Magang',
-                                'lepas' => 'Lepas/Freelance',
+                                'lepas' => 'Freelance',
                             ])
                             ->required()
+                            ->native(false)
                             ->default('tetap'),
+
                         Select::make('roles')
-                            ->label('Role')
+                            ->label('Role Sistem')
                             ->relationship('roles', 'name')
                             ->multiple()
                             ->preload()
                             ->searchable()
                             ->required()
-                            ->native(false),
-                    ]),
+                            ->native(false)
+                            ->columnSpanFull(),
+                    ])
+                    ->columns(2),
             ]);
     }
 }

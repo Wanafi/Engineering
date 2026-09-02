@@ -45,6 +45,7 @@ class DivisisTable
                     ->label('Status Aktif'),
             ])
             ->recordActions([
+                \Filament\Actions\ViewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

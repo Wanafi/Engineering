@@ -15,24 +15,28 @@ class DivisiForm
         return $schema
             ->components([
                 Section::make('Informasi Divisi')
+                    ->description('Kelola nama divisi engineering dan warna penanda.')
+                    ->icon('heroicon-o-user-group')
                     ->schema([
                         TextInput::make('nama_divisi')
                             ->label('Nama Divisi')
                             ->required()
                             ->maxLength(100)
                             ->unique(ignoreRecord: true)
-                            ->live(onBlur: true),
- 
-                       ColorPicker::make('warna')
-                            ->label('Warna Divisi')
+                            ->placeholder('Contoh: HVAC / Escalator & Lift')
+                            ->columnSpan(1),
+
+                        ColorPicker::make('warna')
+                            ->label('Warna Indikator')
                             ->required()
                             ->default('#3498db')
-                            ->helperText('Warna ini akan dipakai untuk menandai event divisi ini di kalender.'),
- 
+                            ->columnSpan(1),
+
                         Toggle::make('is_active')
-                            ->label('Aktif')
+                            ->label('Divisi Aktif')
                             ->default(true)
-                            ->helperText('Nonaktifkan jika divisi tidak lagi dipakai, tanpa menghapus datanya.'),
+                            ->helperText('Nonaktifkan jika divisi sudah tidak beroperasi.')
+                            ->columnSpanFull(),
                     ])
                     ->columns(2),
             ]);
