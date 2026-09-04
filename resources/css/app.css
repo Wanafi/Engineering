@@ -1,9 +1,85 @@
 @import 'tailwindcss';
+@import '../../vendor/guava/calendar/resources/css/theme.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
+@source '../../vendor/guava/calendar/resources/**/*.blade.php';
 
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+@layer base {
+    html,
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    img,
+    canvas,
+    svg {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
+    .fi-main {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .fi-section,
+    .fi-wi-stats-overview-stat,
+    .fi-wi-chart,
+    .fi-ta-ctn {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .fi-ta-ctn {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .ec-toolbar {
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+    }
+
+    .ec-toolbar .ec-title {
+        font-size: 0.9rem !important;
+        order: -1;
+        width: 100%;
+        text-align: center;
+    }
+
+    .ec-button-group {
+        flex-wrap: wrap;
+    }
+
+    .ec-button {
+        padding: 0.35rem 0.5rem !important;
+        font-size: 0.72rem !important;
+    }
+
+    .ec-header .ec-day {
+        font-size: 0.7rem !important;
+        padding: 0.3rem 0 !important;
+    }
+
+    .fi-wi-chart canvas {
+        max-width: 100% !important;
+    }
+}
+
+@media (max-width: 430px) {
+    .fi-topbar {
+        gap: 0.35rem;
+    }
+
+    .ec-day-grid .ec-day {
+        min-height: 3.25rem !important;
+    }
 }

@@ -26,7 +26,9 @@ class ChecklistTemplateResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentCheck;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Checklist Rutin';
+    protected static string|UnitEnum|null $navigationGroup = 'Operations';
+
+    protected static ?int $navigationSort = 3;
 
     protected static ?string $modelLabel = 'Template Checklist';
 

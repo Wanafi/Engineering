@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Divisis\Schemas;
 
 use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
@@ -18,6 +19,15 @@ class DivisiForm
                     ->description('Kelola nama divisi engineering dan warna penanda.')
                     ->icon('heroicon-o-user-group')
                     ->schema([
+                        Select::make('department_id')
+                            ->label('Department')
+                            ->relationship('department', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->native(false)
+                            ->placeholder('Pilih Department')
+                            ->columnSpanFull(),
+
                         TextInput::make('nama_divisi')
                             ->label('Nama Divisi')
                             ->required()

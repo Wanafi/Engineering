@@ -99,7 +99,7 @@ class ChecklistTemplateForm
                                         ->default(0)
                                         ->required(),
                                 ])
-                                ->columns(4)
+                                ->columns(['default' => 1, 'md' => 2, 'lg' => 4])
                                 ->defaultItems(1)
                                 ->reorderable()
                                 ->orderColumn('order')

@@ -774,7 +774,6 @@ Gunakan roadmap berikut sebagai baseline:
 [x] Department
 [x] Division
 [x] Unit
-[ ] Asset / Equipment
 [ ] Checklist
 [ ] Schedule
 [ ] Work Order

@@ -11,7 +11,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class ChecklistExecutionPolicy
 {
     use HandlesAuthorization;
-
+    
     public function viewAny(AuthUser $authUser): bool
     {
         return $authUser->can('ViewAny:ChecklistExecution');
@@ -71,4 +71,5 @@ class ChecklistExecutionPolicy
     {
         return $authUser->can('Reorder:ChecklistExecution');
     }
+
 }

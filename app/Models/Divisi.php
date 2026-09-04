@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
@@ -12,11 +13,17 @@ class Divisi extends Model
     use HasFactory;
 
     protected $fillable = [
+        'department_id',
         'nama_divisi',
         'warna',
         'slug',
         'is_active',
     ];
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
 
     protected $casts = [
         'is_active' => 'boolean',
@@ -34,8 +41,8 @@ class Divisi extends Model
         return $this->hasMany(Event::class);
     }
 
-    public function units()
+    public function units(): HasMany
     {
-        return $this->hasMany(Unit::class);
+        return $this->hasMany(Unit::class, 'divisis_id');
     }
 }
