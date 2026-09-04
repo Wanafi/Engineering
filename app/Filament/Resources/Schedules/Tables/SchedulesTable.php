@@ -45,6 +45,7 @@ class SchedulesTable
                 ]),
             ])
             ->recordActions([
+                \Filament\Actions\Action::make('print')->label('Cetak')->icon('heroicon-o-printer')->color('gray')->url(fn ($record) => route('reports.single', ['type' => 'schedules', 'id' => $record->id]), shouldOpenInNewTab: true),
                 \Filament\Actions\ViewAction::make(),
                 \Filament\Actions\EditAction::make(),
                 \Filament\Actions\DeleteAction::make(),

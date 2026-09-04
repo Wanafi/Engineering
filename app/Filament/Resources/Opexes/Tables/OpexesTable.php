@@ -19,7 +19,7 @@ class OpexesTable
         ])->filters([
             SelectFilter::make("divisis_id")->label("Divisi")->relationship("divisi", "nama_divisi")->searchable()->preload(),
             SelectFilter::make("status")->label("Status")->options(["draft" => "Draft", "submitted" => "Submitted", "approved" => "Approved", "rejected" => "Rejected"]),
-        ])->recordActions([\Filament\Actions\ViewAction::make(), \Filament\Actions\EditAction::make(), \Filament\Actions\DeleteAction::make()])
+        ])->recordActions([\Filament\Actions\Action::make('print')->label('Cetak')->icon('heroicon-o-printer')->color('gray')->url(fn ($record) => route('reports.single', ['type' => 'opex', 'id' => $record->id]), shouldOpenInNewTab: true), \Filament\Actions\ViewAction::make(), \Filament\Actions\EditAction::make(), \Filament\Actions\DeleteAction::make()])
           ->toolbarActions([\Filament\Actions\BulkActionGroup::make([\Filament\Actions\DeleteBulkAction::make()])])
           ->defaultSort("created_at", "desc");
     }

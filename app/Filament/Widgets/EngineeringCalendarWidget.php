@@ -10,6 +10,7 @@ use App\Models\Event;
 use App\Models\WorkOrder;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\HtmlString;
 
 class EngineeringCalendarWidget extends GuavaCalendarWidget
 {
@@ -95,6 +96,8 @@ class EngineeringCalendarWidget extends GuavaCalendarWidget
         return $schedules->concat($events)->concat($workOrders);
     }
 
+    protected string | HtmlString | null | bool $heading = 'Monthly Calendar';
+
     public function config(): array
     {
         return [
@@ -107,7 +110,17 @@ class EngineeringCalendarWidget extends GuavaCalendarWidget
             'initialView' => 'dayGridMonth',
             'selectable' => false,
             'editable' => false,
-            'dayMaxEvents' => true,
+            'dayMaxEvents' => 3,
+            'fixedWeekCount' => false,
+            'showNonCurrentDates' => true,
+            'height' => 'auto',
+            'contentHeight' => 'auto',
+            'expandRows' => true,
+            'handleWindowResize' => true,
+            'eventDisplay' => 'block',
+            'displayEventTime' => false,
+            'weekNumbers' => false,
+            'navLinks' => false,
         ];
     }
 }

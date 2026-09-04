@@ -75,6 +75,7 @@ class ChecklistExecutionsTable
                     ->preload(),
             ])
             ->recordActions([
+                \Filament\Actions\Action::make('print')->label('Cetak')->icon('heroicon-o-printer')->color('gray')->url(fn ($record) => route('reports.single', ['type' => 'checklist_executions', 'id' => $record->id]), shouldOpenInNewTab: true),
                 ViewAction::make(),
                 EditAction::make(),
             ])

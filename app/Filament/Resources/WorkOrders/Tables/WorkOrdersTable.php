@@ -51,6 +51,7 @@ class WorkOrdersTable
                 ]),
             ])
             ->recordActions([
+                \Filament\Actions\Action::make('print')->label('Cetak')->icon('heroicon-o-printer')->color('gray')->url(fn ($record) => route('reports.single', ['type' => 'work_orders', 'id' => $record->id]), shouldOpenInNewTab: true),
                 \Filament\Actions\ViewAction::make(),
                 \Filament\Actions\EditAction::make(),
                 \Filament\Actions\DeleteAction::make(),

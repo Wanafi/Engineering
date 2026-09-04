@@ -12,6 +12,8 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 class EngineeringStatsWidget extends BaseWidget
 {
     protected static ?int $sort = 1;
+    
+    protected int | string | array $columnSpan = 'full';
 
     protected ?string $pollingInterval = '30s';
 
@@ -20,7 +22,9 @@ class EngineeringStatsWidget extends BaseWidget
         return [
             'default' => 1,
             'sm' => 2,
+            'md' => 2,
             'lg' => 4,
+            'xl' => 4,
         ];
     }
 

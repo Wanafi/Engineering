@@ -6,6 +6,7 @@ use App\Filament\Resources\ChecklistExecutions\ChecklistExecutionResource;
 use App\Models\ChecklistTemplate;
 use App\Models\Unit;
 use App\Services\ChecklistExecutionService;
+use App\Support\ReportPrintActions;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
 use Filament\Schemas\Components\Utilities\Get;
@@ -20,6 +21,8 @@ class ListChecklistExecutions extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+            ReportPrintActions::listPreview("checklist_executions"),
+            ReportPrintActions::listPrint("checklist_executions"),
             Action::make('createExecution')
                 ->label('Buat Pemeriksaan Baru')
                 ->icon('heroicon-o-plus')
